@@ -1,3 +1,5 @@
+'use strict';
+
 var grunt = require('grunt');
 
 /*
@@ -20,15 +22,18 @@ var grunt = require('grunt');
     test.ifError(value)
 */
 
-exports['markx'] = {
+exports.markx = {
   setUp: function(done) {
-    // setup here
+    // setup here if necessary
     done();
   },
-  'helper': function(test) {
+  basic: function(test) {
     test.expect(1);
-    // tests here
-    test.equal(grunt.helper('markx'), 'markx!!!', 'should return the correct value.');
+
+    var actual = grunt.file.read('example/output.html');
+    var expected = grunt.file.read('test/expected/output.html');
+    test.equal(actual, expected, 'should generate html');
+
     test.done();
-  }
+  },
 };

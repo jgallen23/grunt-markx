@@ -1,6 +1,9 @@
+---
+someVar: abc
+---
 #Headline
 
-some paragraph of text
+some paragraph of text.
 
 ##Code
 

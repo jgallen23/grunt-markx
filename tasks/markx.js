@@ -2,45 +2,57 @@
  * grunt-markx
  * https://github.com/jgallen23/grunt-markx
  *
- * Copyright (c) 2012 Greg Allen
+ * Copyright (c) 2013 Greg Allen
  * Licensed under the MIT license.
  */
 
+'use strict';
+
 module.exports = function(grunt) {
 
-  // Please see the grunt documentation for more information regarding task and
-  // helper creation: https://github.com/gruntjs/grunt/blob/master/docs/toc.md
-
-  // ==========================================================================
-  // TASKS
-  // ==========================================================================
-
+  // Please see the Grunt documentation for more information regarding task
+  // creation: http://gruntjs.com/creating-tasks
   var markx = require('markx');
-  var fs = require('fs');
 
-  grunt.registerMultiTask('markx', 'Convert markdown and code snippets into html', function() {
-
-    this.requiresConfig('markx');
-    var self = this;
+  grunt.registerMultiTask('markx', 'Grunt plugin for converting markdown and code into html', function() {
+    // Merge task-specific and/or target-specific options with these defaults.
+    var options = this.options({});
     var done = this.async();
+    var total = this.files.length;
+    var current = 0;
 
-    markx(this.data, function(err, html) {
-      if (err) {
-        grunt.log.error(err.message);
-      }
+    // Iterate over all specified file groups.
+    this.files.forEach(function(f) {
+      // Concat specified files.
+      var src = f.src.filter(function(filepath) {
+        // Warn on and remove invalid source files (if nonull was set).
+        if (!grunt.file.exists(filepath)) {
+          grunt.log.warn('Source file "' + filepath + '" not found.');
+          return false;
+        } else {
+          return true;
+        }
+      }).map(function(filepath) {
+        // Read file source.
+        return grunt.file.read(filepath);
+      }).join('\n');
 
-      fs.writeFile(self.data.output, html, function(err) {
+      options.input = src;
+
+      markx(options, function(err, html) {
         if (err) {
           grunt.log.error(err.message);
         }
-        grunt.log.writeln(self.data.output + ' created.');
-        done();
+
+        grunt.file.write(f.dest, html);
+        grunt.log.writeln('File "' + f.dest + '" created.');
+        current++;
+        if (total === current) {
+          done();
+        }
+
       });
-
-
     });
-
   });
-
 
 };

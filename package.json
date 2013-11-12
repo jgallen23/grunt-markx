@@ -20,21 +20,24 @@
       "url": "https://github.com/jgallen23/grunt-markx/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "grunt.js",
-  "bin": "bin/grunt-markx",
+  "main": "Gruntfile.js",
   "engines": {
-    "node": "*"
+    "node": ">= 0.8.0"
   },
   "scripts": {
     "test": "grunt test"
   },
   "devDependencies": {
-    "grunt": "~0.3.17"
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.1",
+    "markx": "~0.3.3"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
   },
   "keywords": [
-    "gruntplugin", "markdown"
-  ],
-  "dependencies": {
-    "markx": "~0.2.0"
-  }
+    "gruntplugin"
+  ]
 }

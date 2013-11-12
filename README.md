@@ -1,28 +1,47 @@
 # grunt-markx
 
-Grunt plugin for converting markdown and code into html
+> Grunt plugin for converting markdown and code into html
 
 ## Getting Started
-Install this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-markx`
+This plugin requires Grunt `~0.4.1`
 
-Then add this line to your project's `grunt.js` gruntfile:
+If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
-```javascript
+```shell
+npm install grunt-markx --save-dev
+```
+
+Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+
+```js
 grunt.loadNpmTasks('grunt-markx');
 ```
 
-[grunt]: http://gruntjs.com/
-[getting_started]: https://github.com/gruntjs/grunt/blob/master/docs/getting_started.md
+## The "markx" task
 
-## Documentation
-_(Coming soon)_
+### Overview
+In your project's Gruntfile, add a section named `markx` to the data object passed into `grunt.initConfig()`.
+
+```js
+grunt.initConfig({
+	markx: {
+		input: {
+			options: {
+				template: 'example/layout.html',
+				data: {
+					pageTitle: 'this is the page title'
+				}
+			},
+			files: {
+				'example/output.html': 'example/input.md'
+			}
+		}
+	},
+})
+```
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt][grunt].
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 _(Nothing yet)_
-
-## License
-Copyright (c) 2012 Greg Allen  
-Licensed under the MIT license.
